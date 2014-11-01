@@ -1,0 +1,1 @@
+在master下克隆分支：git clone -b learnpythonthehardway git@github.com:kuiwa/learngit.git
