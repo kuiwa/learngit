@@ -1,6 +1,7 @@
 clone brach from remote server(in the learnpythonthehardway path)£ºgit clone -b learnpythonthehardway git@github.com:kuiwa/learngit.git
 update from remote server: git fetch origin, then, git merge orgin/branch
 kuiwa@CNBEIN0L062551 /f/Python/learngit/learnpythonthehardway (learnpythonthehardway)
+build a the branch that you want to add or update, such as "git branch codingbat/ git checkout codingbat, then follow the step as bellow
 $ git fetch origin
 kuiwa@CNBEIN0L062551 /f/Python/learngit/learnpythonthehardway (learnpythonthehardway)
 $ git merge origin/learnpythonthehardway
