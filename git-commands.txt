@@ -1,1 +1,16 @@
-在master下克隆分支：git clone -b learnpythonthehardway git@github.com:kuiwa/learngit.git
+clone brach from remote server(in the learnpythonthehardway path)：git clone -b learnpythonthehardway git@github.com:kuiwa/learngit.git
+update from remote server: git fetch origin, then, git merge orgin/branch
+kuiwa@CNBEIN0L062551 /f/Python/learngit/learnpythonthehardway (learnpythonthehardway)
+$ git fetch origin
+kuiwa@CNBEIN0L062551 /f/Python/learngit/learnpythonthehardway (learnpythonthehardway)
+$ git merge origin/learnpythonthehardway
+Updating 24af23a..69411a2
+Fast-forward
+ git-commands.txt                   |   1 +
+ learnpythonthehardway/dict.txt     |  17 ++++++
+ learnpythonthehardway/ex48_test.py |  17 ++++++
+ learnpythonthehardway/lexicon.py   | 112 ++++++++++++++++++++++++-------------
+ 4 files changed, 108 insertions(+), 39 deletions(-)
+ create mode 100644 git-commands.txt
+ create mode 100644 learnpythonthehardway/dict.txt
+ create mode 100644 learnpythonthehardway/ex48_test.py
