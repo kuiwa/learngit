@@ -1,0 +1,17 @@
+$def with (h_greeting, h_form)
+
+<html>
+    <head>
+        <title>EX50 TITLE</title>
+    </head>
+<body>
+
+$if h_greeting:
+    <em style="color: green; font-size: 2em;">$h_greeting -> h_greeting
+	<br/>
+	$h_form</em>.
+$else:
+    <em>No greeting</em>
+
+</body>
+</html>

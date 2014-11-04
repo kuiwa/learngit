@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-					
+
+	
 class lexicon_dict(object):
 
 	def __init__(self, dict_txt):
@@ -49,6 +50,7 @@ d = lexicon_dict(dict_txt)
 dictionary = d.cat_dict_txt()
 
 
+
 print """
 	Please enter 'yes' if you want to add word into the dictionary.
 	Otherwise HIT RETURN.
@@ -69,17 +71,19 @@ for key in dictionary:
 		search = 'Found'
 		break
 
-def print_result(word_in, default=dictionary, default=choice)
-if choice_add and search:
-	print "%s is alreay in the dictionary." % word_in
-	print "key = %s, value = %s" % (word_in, dictionary[word_in])
-elif choice_add == False and search == 'Found':
-	print "key = %s, value = %s" % (word_in, dictionary[word_in])
-elif choice_add == True and search == False:
-	d.add(word_in)
-	print "The %s is already added to dictionary." % word_in
-else:
-	print "Sorry, NOT FOUND!"
+def print_result(word_in, dic=dictionary, choice=choice_add):
+	if choice and search:
+		print "%s is alreay in the dic." % word_in
+		print "key = %s, value = %s" % (word_in, dic[word_in])
+	elif choice == False and search == 'Found':
+		print "key = %s, value = %s" % (word_in, dic[word_in])
+	elif choice == True and search == False:
+		d.add(word_in)
+		print "The %s is already added to dic." % word_in
+	else:
+		print "Sorry, NOT FOUND!"
+		
+print_result(word_in)
 
 scan_words = raw_input("Please input  words: ")	
 if scan_words != '':

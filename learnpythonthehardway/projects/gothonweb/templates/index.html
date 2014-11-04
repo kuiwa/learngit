@@ -1,0 +1,9 @@
+$def with  (greeting)
+<!--用来定义一个暂时变量，用来接收python传入的变量-->
+
+$if greeting: 
+	I just wanted to say 
+	<em style="color: green; font-size: 2em;">$greeting</em>.	<!--访问变量greeting，即显示-->
+$else:
+	<em>Hello</em>, Alien!
+	
