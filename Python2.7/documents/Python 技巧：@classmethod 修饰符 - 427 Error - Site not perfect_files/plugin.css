@@ -1,0 +1,12 @@
+p { text-indent: 2em; }
+a { color: 2B082A; }
+div#buzzwidget { border: none !important; }
+a.buzzwidget-comment { font-size: 10px !important; }
+li#sponsored { display: none; !important; }
+#article_body { text-align: left; }
+.searchword { background-color: yellow;}#tag_cloud{padding:5px 20px 0px 20px;}
+            .tag_css1 { font-size: 8px; }
+            .tag_css2 { font-size: 12px; }
+            .tag_css3 { font-size: 16px; }
+            .tag_css4 { font-size: 24px; }
+            

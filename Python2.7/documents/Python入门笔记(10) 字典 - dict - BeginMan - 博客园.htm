@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/analytics.js" async=""></script>
+<meta charset="utf-8">
+<title>Python入门笔记(10):字典 - BeginMan - 博客园</title>
+<link type="text/css" rel="stylesheet" href="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/bundle-darkgreentrip.css">
+<link type="text/css" rel="stylesheet" href="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/136155.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/BeginMan/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/BeginMan/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/BeginMan/wlwmanifest.xml">
+<script src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/encoder.js" type="text/javascript"></script><script src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/gpt.js" type="text/javascript" async=""></script><script src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'BeginMan', cb_enable_mathjax=false;</script>
+<script src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/blog-common.js" type="text/javascript"></script>
+<script src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/pubads_impl_52.js" type="text/javascript" async=""></script><script src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/osd.js" type="text/javascript"></script></head>
+<body>
+<a name="top"></a>
+<!--PageBeginHtml Block Begin-->
+<!-- Markdown -->
+<link rel="stylesheet" href="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/Markdown.css" type="text/css">
+<link rel="stylesheet" href="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/prettify.css" type="text/css">
+
+<script src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/prettify.js" type="text/javascript"></script>
+
+<!-- Markdown End -->
+<!--PageBeginHtml Block End-->
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/BeginMan/"><img id="blogLogo" src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/BeginMan/">BeginMan</a></h1>
+<h2>Python学习之旅</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="MyLinks1_HomeLink" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="MyLinks1_MyHomeLink" class="menu" href="http://www.cnblogs.com/BeginMan/">首页</a></li>
+<li><a id="MyLinks1_NewPostLink" class="menu" rel="nofollow" href="http://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li></li>
+<li><a id="MyLinks1_Syndication" class="menu" href="http://www.cnblogs.com/BeginMan/rss">订阅</a>
+<!--<a id="MyLinks1_XMLLink" class="aHeaderXML" href="http://www.cnblogs.com/BeginMan/rss"><img src="http://www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="MyLinks1_Admin" class="menu" rel="nofollow" href="http://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			
+<!--done-->
+随笔- 197&nbsp;
+文章- 0&nbsp;
+评论- 98&nbsp;
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/BeginMan/p/3156960.html">Python入门笔记(10):字典</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p class="cdtitle">一、映射类型</p>
+<p>我理解中的映射类型是：键值对的关系，键(key)映射值(value),且它们是一对多的关系。<br>字典是Python唯一的映射类型。</p>
+<p><strong><span style="color: #0000ff;">扩展1：哈希表</span></strong><br>一种数据结构，值是根据相关的键进行数据存储的，形成"键-值对"(key-value pairs),哈希表中的值是没有顺序的。</p>
+<p><strong><span style="color: #0000ff;">扩展2：映射类型与序列类型的区别</span></strong></p>
+<p>1):访问方式不同，序列类型用数字类型的键，而映射类型可以用其他对象类型做键(一般式字符串)</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>&gt;&gt;&gt; lis = [<span style="color: #800000;">'</span><span style="color: #800000;">a</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">b</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">c</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+</span>&gt;&gt;&gt; lis[2<span style="color: #000000;">]
+</span><span style="color: #800000;">'</span><span style="color: #800000;">c</span><span style="color: #800000;">'</span>
+&gt;&gt;&gt; dic = {<span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span>:<span style="color: #800000;">'</span><span style="color: #800000;">a</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">father</span><span style="color: #800000;">'</span>:<span style="color: #800000;">'</span><span style="color: #800000;">b</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">mother</span><span style="color: #800000;">'</span>:<span style="color: #800000;">'</span><span style="color: #800000;">c</span><span style="color: #800000;">'</span><span style="color: #000000;">}
+</span>&gt;&gt;&gt; dic[<span style="color: #800000;">'</span><span style="color: #800000;">mother</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+</span><span style="color: #800000;">'</span><span style="color: #800000;">c</span><span style="color: #800000;">'</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>2):存储类型不同，映射类型的键，直接或间接地与值相关。<br>3):序列类型，有序之列；映射类型则无序之列</p>
+<p class="cdtitle">二、字典</p>
+<p><strong><span style="color: #0000ff;">1、工厂方法dict()：</span></strong></p>
+<div class="cnblogs_code"><div>按 Ctrl+C 复制代码</div><textarea style="width: 621px; height: 164px; font-family: Courier New; font-size: 12px; line-height: 1.5;">&gt;&gt;&gt; tu=(['a','b'],['xx','yy'])
+&gt;&gt;&gt; tu
+(['a', 'b'], ['xx', 'yy'])
+&gt;&gt;&gt; fdict = dict(tu)
+&gt;&gt;&gt; fdict
+{'a': 'b', 'xx': 'yy'}</textarea><div>按 Ctrl+C 复制代码</div></div>
+<p><strong><span style="color: #0000ff;">2、访问形式：</span></strong></p>
+<div class="cnblogs_code"><div>按 Ctrl+C 复制代码</div><textarea style="width: 621px; height: 548px; font-family: Courier New; font-size: 12px; line-height: 1.5;">&gt;&gt;&gt; dic
+{'father': 'b', 'name': 'a', 'mother': 'c'}
+&gt;&gt;&gt; for obj in dic:
+    print obj
+
+father
+name
+mother
+&gt;&gt;&gt; for obj in dic.keys():
+    print obj
+
+    
+father
+name
+mother
+&gt;&gt;&gt; for obj in dic.values():
+    print obj
+
+    
+b
+a
+c
+&gt;&gt;&gt; for obj in dic.items():
+    print obj
+
+    
+('father', 'b')
+('name', 'a')
+('mother', 'c')
+&gt;&gt;&gt;</textarea><div>按 Ctrl+C 复制代码</div></div>
+<p><span style="color: #0000ff;"><strong>3、has_key()、in、not in来检查是否有某个键，has_key()已慢慢弃用了。</strong></span></p>
+<p><strong><span style="color: #0000ff;">4、有则更新，无则添</span></strong></p>
+<p><strong><span style="color: #0000ff;">5、删除</span></strong></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">del</span> dic[<span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span>]   <span style="color: #008000;">#</span><span style="color: #008000;">删除元素</span>
+<span style="color: #0000ff;">del</span> dic <span style="color: #008000;">#</span><span style="color: #008000;">删除整个</span></pre>
+</div>
+<p><strong><span style="color: #0000ff;">6、操作符</span></strong><br>[]、和 in、not in</p>
+<div class="cnblogs_code">
+<pre>&gt;&gt;&gt; <span style="color: #0000ff;">if</span> <span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span> <span style="color: #0000ff;">in</span><span style="color: #000000;"> dic:
+    </span><span style="color: #0000ff;">print</span> dic[<span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+a</span></pre>
+</div>
+<p><strong><span style="color: #0000ff;">7、相关函数</span></strong><br>dict()：创建字典<br>len():返回键值对数目<br>hash(obj):返回obj的哈希值</p>
+<p><strong><span style="color: #0000ff;">8、内建方法</span></strong><br>dict.clear()：删除字典中所有元素<br>dict.copy():浅copy<br>dict.formkeys()：创建字典<br>dict.get(key,default=None):返回对应键值<br>dict.has_key():键是否存在<br>dict.items()：返回字典中键值对元祖的列表<br>dict.keys():键的列表dict.values():值的列表<br>......</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>&gt;&gt;&gt;<span style="color: #000000;"> dic.keys()
+[</span><span style="color: #800000;">'</span><span style="color: #800000;">father</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">mother</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+</span>&gt;&gt;&gt;<span style="color: #000000;"> dic.values()
+[</span><span style="color: #800000;">'</span><span style="color: #800000;">b</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">a</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">c</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+</span>&gt;&gt;&gt; dic.get(<span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+</span><span style="color: #800000;">'</span><span style="color: #800000;">a</span><span style="color: #800000;">'</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p class="cdtitle">&nbsp;三、注意</p>
+<p><span style="color: #0000ff;"><strong>1、</strong></span>不允许一个键对应多个值，一个键只能对应一项<br><strong><span style="color: #0000ff;">2、</span></strong>当键发生冲突时，取最后一个。<br><strong><span style="color: #0000ff;">3、</span></strong>Python不会检查键的冲突，也不会因为键的冲突而产生错误，如果检查每个键是否冲突势必会占用很多内存。</p>
+<div class="cnblogs_code">
+<pre>&gt;&gt;&gt; dic={<span style="color: #800000;">'</span><span style="color: #800000;">a</span><span style="color: #800000;">'</span>:<span style="color: #800000;">'</span><span style="color: #800000;">ss</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">a</span><span style="color: #800000;">'</span>:<span style="color: #800000;">"</span><span style="color: #800000;">xxxx</span><span style="color: #800000;">"</span><span style="color: #000000;">}
+</span>&gt;&gt;&gt;<span style="color: #000000;"> dic
+{</span><span style="color: #800000;">'</span><span style="color: #800000;">a</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">xxxx</span><span style="color: #800000;">'</span>}</pre>
+</div>
+<p><strong><span style="color: #0000ff;">4、</span></strong>键必须是可哈希的。<br>所有不可变类型都是可哈希的，不可变类型如（列表、字典）则不能。<br><span style="color: #ff6600;">不可变类型：string,integer,tuple、</span><br><span style="color: #ff6600;">可变类型：list,dict</span><br><br><strong><span style="color: #0000ff;">5、</span></strong>值相同的数字表示相同的键，如1和1.0的哈希值是相同的，因此它们是相同的键。</p>
+<div class="cnblogs_code">
+<pre>&gt;&gt;&gt; dic={1:<span style="color: #800000;">'</span><span style="color: #800000;">a</span><span style="color: #800000;">'</span>,1.0:<span style="color: #800000;">'</span><span style="color: #800000;">b</span><span style="color: #800000;">'</span><span style="color: #000000;">}
+</span>&gt;&gt;&gt;<span style="color: #000000;"> dic
+{</span>1: <span style="color: #800000;">'</span><span style="color: #800000;">b</span><span style="color: #800000;">'</span>}</pre>
+</div>
+<p>&nbsp;</p></div><div style="display: block;" id="MySignature"><a href="http://weibo.com/u/2530590633?s=6uyXnP" target="_blank"><img src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/1.png" border="0"></a>
+<h2>文章同步更新在:<a href="http://blog.beginman.cn/">http://blog.beginman.cn/</a></h2></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/BeginMan/category/457665.html">Python入门</a></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/BeginMan/tag/Python/">Python</a></div>
+<div id="blog_post_info"><div id="green_channel">
+绿色通道：
+<a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(3156960,cb_blogId,1);green_channel_success(this,'谢谢推荐！');">好文要顶</a>
+<a id="green_channel_follow" onclick="c_follow();" href="javascript:void(0);">关注我</a>
+<a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a><a id="green_channel_contact" href="http://space.cnblogs.com/msg/send/BeginMan" target="_blank">与我联系</a>
+<a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/icon_weibo_24.png" alt=""></a>
+</div>
+<div id="author_profile">
+<div id="author_profile_info" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/BeginMan/" target="_blank"><img src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/20131002150957.jpg" class="author_avatar" alt=""></a>
+<div id="author_profile_detail" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/BeginMan/">BeginMan</a><br>
+<a href="http://home.cnblogs.com/u/BeginMan/followees">关注 - 37</a><br>
+<a href="http://home.cnblogs.com/u/BeginMan/followers">粉丝 - 239</a>
+</div>
+</div>
+<div class="clear"></div>
+<div id="author_profile_honor"></div>
+<div id="author_profile_follow">
+    <a href="javascript:void(0);" onclick="c_follow();return false;">+加关注</a>
+</div>
+</div>
+<div id="div_digg">										
+    <div class="diggit" onclick="votePost(3156960,'Digg')">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+	<div class="buryit" onclick="votePost(3156960,'Bury')"> 
+		<span class="burynum" id="bury_count">0</span>
+	</div>
+	<div class="clear"></div>	
+	<div class="diggword" id="digg_tips">
+    (请您对文章做出评价)
+    </div>	
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/BeginMan/p/3156235.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/BeginMan/p/3156235.html" title="发布于2013-06-26 11:10">Python入门笔记(9):元组</a><br><a href="http://www.cnblogs.com/BeginMan/p/3158151.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/BeginMan/p/3158151.html" title="发布于2013-06-27 10:04">python 可变 与 不可变类型</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2013-06-26 17:30</span> <a href="http://www.cnblogs.com/BeginMan/">BeginMan</a> 阅读(<span id="post_view_count">684</span>) 评论(<span id="post_comment_count">0</span>)  <a href="http://i.cnblogs.com/EditPosts.aspx?postid=3156960" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(3156960);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,isLogined=false,cb_blogId=136155,cb_entryId=3156960,cb_blogApp=currentBlogApp,cb_blogUserGuid='6bc19d85-cd3f-e211-aa8f-842b2b196315',cb_entryCreatedDate='2013/6/26 17:30:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+<a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" id="lnk_RefreshComments" onclick="return RefreshCommentList();">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login('commentform');">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="site_nav_under"><a href="http://www.imooc.com/view/22?from=cnblogs" target="_blank"><b>【免费课程】案例：网页广告特效</b></a><br><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态\工控、电力仿真CAD\GIS源码库</a><br><a href="http://www.rongcloud.cn/promotion/" target="_blank">融云，免费为你的App加入IM功能——让你的App“聊”起来！！</a><br><a href="http://zt.cnblogs.com/tingyun/" target="_blank">听云APP性能监测 —— 终结移动App性能黑洞</a></div>
+<div id="opt_under_post"></div>
+<script type="text/javascript">
+    var enableGoogleAd = canShowAdsense(); var googletag = googletag || {}; googletag.cmd = googletag.cmd || [];
+    fixPostBodyFormat();
+</script>
+<div id="ad_under_post_holder">
+<script type="text/javascript">
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function () {
+        if (enableGoogleAd) {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        }
+    })();
+</script>
+<script type="text/javascript">
+    try {
+        if (enableGoogleAd) {
+            googletag.cmd.push(function () {
+                googletag.defineSlot('/1090369/cnblogs_blogpost_C1_sitehome', [300, 250], 'div-gpt-ad-1346480159711-0').addService(googletag.pubads());
+                googletag.defineSlot('/1090369/cnblogs_blogpost_C2', [468, 60], 'div-gpt-ad-1410860226396-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+        };
+    } catch (e) { }
+</script>
+<div id="google_ad_c1" class="c_ad_block">
+    <div id="div-gpt-ad-1346480159711-0" style="width: 300px; height: 250px;">
+    <script type="text/javascript">
+        try {
+            if (enableGoogleAd) {
+                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1346480159711-0'); });            
+            } else {
+                $('#div-gpt-ad-1346480159711-0').hide();
+            }
+    } catch (e) { }
+    </script>
+    <div style="border: 0pt none;" id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__container__"><iframe src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" style="border: 0px none; vertical-align: bottom;" marginheight="0" marginwidth="0" scrolling="no" name="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0" id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0" frameborder="0" height="250" width="300"></iframe></div><iframe src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" style="border: 0px none; vertical-align: bottom; visibility: hidden; display: none;" marginheight="0" marginwidth="0" scrolling="no" name="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__hidden__" id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__hidden__" frameborder="0" height="0" width="0"></iframe></div>
+</div>
+</div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/507148/" target="_blank">在线职业教育：国企和公务员是主力军</a><br> ·  <a href="http://news.cnblogs.com/n/507147/" target="_blank">美国一无人航天飞船发射后不久爆炸</a><br> ·  <a href="http://news.cnblogs.com/n/507146/" target="_blank">苹果首次解释iOS 8“砖头门”事件： 推送出了问题</a><br> ·  <a href="http://news.cnblogs.com/n/507145/" target="_blank">AT&amp;T偷偷摸摸限制数据流量遭美国政府起诉</a><br> ·  <a href="http://news.cnblogs.com/n/507144/" target="_blank">为什么要做国产操作系统</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="google_ad_c2" class="c_ad_block">
+<div id="div-gpt-ad-1410860226396-0" style="width: 468px; height: 60px;">
+<script type="text/javascript">
+try {
+    if (enableGoogleAd) {
+        googletag.cmd.push(function () { googletag.display('div-gpt-ad-1410860226396-0'); });
+    } else {
+        $('#div-gpt-ad-1346480159711-0').hide();
+    }
+} catch (e) { }
+</script>
+<div style="border: 0pt none;" id="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0__container__"><iframe src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" style="border: 0px none; vertical-align: bottom;" marginheight="0" marginwidth="0" scrolling="no" name="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0" id="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0" frameborder="0" height="60" width="468"></iframe></div></div>
+</div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/506898/" target="_blank">图数据挖掘浅析</a><br> ·  <a href="http://kb.cnblogs.com/page/506732/" target="_blank">一像素的恩怨情仇！程序猿与设计狮之间的那些事儿</a><br> ·  <a href="http://kb.cnblogs.com/page/506482/" target="_blank">万台规模下的SDN控制器集群部署实践</a><br> ·  <a href="http://kb.cnblogs.com/page/506484/" target="_blank">ODPS技术架构及应用实践</a><br> ·  <a href="http://kb.cnblogs.com/page/506016/" target="_blank">【译文】设计的初心</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+$(function () {
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 200);
+});
+</script>
+</div>
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><h2><span style="color: red;"><strong><a href="http://beginman.cn/" target="_blank">http://beginman.cn/</a></strong></span></h2><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/BeginMan/">BeginMan</a><br>园龄：<a href="http://home.cnblogs.com/u/BeginMan/" title="入园时间：2012-12-07">1年10个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/BeginMan/followers/">239</a><br>关注：<a href="http://home.cnblogs.com/u/BeginMan/followees/">37</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="cnblogs.UserManager.FollowBlogger('6bc19d85-cd3f-e211-aa8f-842b2b196315')">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" title="日历" cellpadding="0" cellspacing="0">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar('2014/09/01');return false;">&lt;</a></td><td align="center">2014年10月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar('2014/11/01');return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" abbr="日" scope="col" align="center">日</th><th class="CalDayHeader" abbr="一" scope="col" align="center">一</th><th class="CalDayHeader" abbr="二" scope="col" align="center">二</th><th class="CalDayHeader" abbr="三" scope="col" align="center">三</th><th class="CalDayHeader" abbr="四" scope="col" align="center">四</th><th class="CalDayHeader" abbr="五" scope="col" align="center">五</th><th class="CalDayHeader" abbr="六" scope="col" align="center">六</th></tr><tr><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td class="CalWeekendDay" align="center">4</td></tr><tr><td class="CalWeekendDay" align="center">5</td><td align="center">6</td><td align="center">7</td><td align="center">8</td><td align="center">9</td><td align="center">10</td><td class="CalWeekendDay" align="center">11</td></tr><tr><td class="CalWeekendDay" align="center">12</td><td align="center">13</td><td align="center">14</td><td align="center">15</td><td align="center">16</td><td align="center">17</td><td class="CalWeekendDay" align="center">18</td></tr><tr><td class="CalWeekendDay" align="center">19</td><td align="center">20</td><td align="center">21</td><td align="center">22</td><td align="center">23</td><td align="center">24</td><td class="CalWeekendDay" align="center">25</td></tr><tr><td class="CalWeekendDay" align="center">26</td><td align="center">27</td><td align="center">28</td><td class="CalTodayDay" align="center">29</td><td align="center">30</td><td align="center">31</td><td class="CalOtherMonthDay" align="center">1</td></tr><tr><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn">
+<div class="catListEssay">
+<h3 class="catListTitle">最新随笔</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/BeginMan/p/3911319.html">1. 最新博客迁移到 beginman.cn</a></li><li><a href="http://www.cnblogs.com/BeginMan/p/3890761.html">2. Redis+Django(Session,Cookie)的用户系统</a></li><li><a href="http://www.cnblogs.com/BeginMan/p/3889822.html">3. Redis &amp; Python/Django 简单用户登陆</a></li><li><a href="http://www.cnblogs.com/BeginMan/p/3860133.html">4. django开发的社区和博客</a></li><li><a href="http://www.cnblogs.com/BeginMan/p/3801723.html">5. django 注册、登录及第三方接口程序(4)：扩展邮箱注册，登录，微博登录</a></li><li><a href="http://www.cnblogs.com/BeginMan/p/3757160.html">6. SSH与SCP小指南</a></li><li><a href="http://www.cnblogs.com/BeginMan/p/3754322.html">7. Mysql Join语法解析与性能分析</a></li><li><a href="http://www.cnblogs.com/BeginMan/p/3657805.html">8. Python操作Excel</a></li><li><a href="http://www.cnblogs.com/BeginMan/p/3644283.html">9. Python 实现有道翻译命令行版</a></li><li><a href="http://www.cnblogs.com/BeginMan/p/3643674.html">10. Python输出py文件模拟代码高亮</a></li>
+</ul>
+</div>
+
+<div class="catListPostCategory">
+<h3 class="catListTitle">随笔分类<span style="font-size:11px;font-weight:normal">(192)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/BeginMan/category/458761.html">Django入门(15)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/BeginMan/category/551237.html">Git(9)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/BeginMan/category/446338.html">JavaScript(18)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/BeginMan/category/552463.html">jekyll(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/BeginMan/category/446370.html">jQuery(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/BeginMan/category/507047.html">Mysql(10)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/BeginMan/category/449507.html">options(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/BeginMan/category/457665.html">Python入门(33)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/BeginMan/category/497979.html">豆瓣之梦(36)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/BeginMan/category/458402.html">软件工程(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="http://www.cnblogs.com/BeginMan/category/468152.html">深入Django(21)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="http://www.cnblogs.com/BeginMan/category/468151.html">深入Python(37)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListPostArchive">
+<h3 class="catListTitle">随笔档案<span style="font-size:11px;font-weight:normal">(197)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/BeginMan/archive/2014/08.html">2014年8月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="http://www.cnblogs.com/BeginMan/archive/2014/07.html">2014年7月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="http://www.cnblogs.com/BeginMan/archive/2014/06.html">2014年6月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="http://www.cnblogs.com/BeginMan/archive/2014/05.html">2014年5月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="http://www.cnblogs.com/BeginMan/archive/2014/04.html">2014年4月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="http://www.cnblogs.com/BeginMan/archive/2014/03.html">2014年3月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="http://www.cnblogs.com/BeginMan/archive/2014/02.html">2014年2月 (10)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="http://www.cnblogs.com/BeginMan/archive/2014/01.html">2014年1月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="http://www.cnblogs.com/BeginMan/archive/2013/12.html">2013年12月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_9" href="http://www.cnblogs.com/BeginMan/archive/2013/11.html">2013年11月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_10" href="http://www.cnblogs.com/BeginMan/archive/2013/10.html">2013年10月 (10)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_11" href="http://www.cnblogs.com/BeginMan/archive/2013/09.html">2013年9月 (9)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_12" href="http://www.cnblogs.com/BeginMan/archive/2013/08.html">2013年8月 (22)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_13" href="http://www.cnblogs.com/BeginMan/archive/2013/07.html">2013年7月 (49)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_14" href="http://www.cnblogs.com/BeginMan/archive/2013/06.html">2013年6月 (17)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_15" href="http://www.cnblogs.com/BeginMan/archive/2013/05.html">2013年5月 (15)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_16" href="http://www.cnblogs.com/BeginMan/archive/2013/04.html">2013年4月 (9)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_17" href="http://www.cnblogs.com/BeginMan/archive/2013/03.html">2013年3月 (17)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_18" href="http://www.cnblogs.com/BeginMan/archive/2013/01.html">2013年1月 (8)</a> </li>
+
+</ul>
+
+</div>
+
+</div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2014 BeginMan
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+<!--PageEndHtml Block Begin-->
+<script src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/jquery-1.js" type="text/javascript"></script><iframe style="visibility: hidden; display: none;" src="Python%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%2810%29%20%E5%AD%97%E5%85%B8%20-%20dict%20-%20BeginMan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/container.htm"></iframe>
+<script type="text/javascript">
+$(document).ready(function() {
+    
+    //代码高亮
+    $("pre").addClass("prettyprint linenums");
+    prettyPrint();
+     
+</script>
+<!--PageEndHtml Block End-->
+
+
+<iframe style="display: none; width: 0px; height: 0px;" name="google_osd_static_frame" id="google_osd_static_frame_9204880596716"></iframe></body></html>
