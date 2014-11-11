@@ -1,0 +1,6 @@
+Mike 10 10 4
+Nike 15 12 4
+Richel 20 14 6
+Derek 5 4 2
+Rango 5 4 3
+Lily 5 3 1

@@ -1,0 +1,638 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="all">
+<meta name="author" content="">
+<meta name="description" content="Python 技巧：@classmethod 修饰符-	通常情况下，如果我们要使用一个类的方法，那我们只能将一个类实体化成一个对象，进而调用对象使用方法。	比如：			class Hello(object):		  def __init__:		    ...				  def print_hello(self):		    print &amp;quot;Hello&amp;quot;	要用 print...">
+<meta name="keywords" content="">
+<link rel="shortcut icon" type="image/x-icon" href="http://xuqingkuang.is-programmer.com/user_files/xuqingkuang/config/favicon.ico">
+<link href="http://xuqingkuang.is-programmer.com/posts.rss" rel="alternate" title="Blog RSS" type="application/rss+xml">
+<link href="http://xuqingkuang.is-programmer.com/comments.rss" rel="alternate" title="Comments RSS" type="application/rss+xml">
+<link href="http://xuqingkuang.is-programmer.com/messages.rss" rel="alternate" title="Messages RSS" type="application/rss+xml">
+<link href="http://xuqingkuang.is-programmer.com/site.rss" rel="alternate" title="is-Programmer.com RSS" type="application/rss+xml">
+<link href="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/common.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/jquery-ui.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/application.css" media="screen" rel="stylesheet" type="text/css">
+
+
+<meta content="authenticity_token" name="csrf-param">
+<meta content="kgMiwkTgCMSwfEiVNEFLRr7+L0w84NtDD3EhTWy2oAs=" name="csrf-token">
+<script src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/ga.js" async="" type="text/javascript"></script><script src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/ga.js" async="" type="text/javascript"></script><script src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/jquery-1.js" type="text/javascript"></script>
+<title>Python 技巧：@classmethod 修饰符 - 427 Error - Site not perfect</title>
+<script src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/searchhi.js" type="text/javascript"></script><link href="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/shCore.css" media="screen" rel="stylesheet" type="text/css">
+<link href="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/shThemeDefault.css" media="screen" rel="stylesheet" type="text/css">
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1563106-1']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<link rel="me" type="text/html" href="http://www.google.com/profiles/XuqingKuang">
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1047700-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<link href="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/plugin.css" media="screen" rel="stylesheet" type="text/css">
+</head>
+
+<body onpageshow='event.persisted &amp;&amp; (function(){var allInstances = CKEDITOR.instances, editor, doc;for ( var i in allInstances ){	editor = allInstances[ i ];	doc = editor.document;	if ( doc )	{		doc.$.designMode = "off";		doc.$.designMode = "on";	}}})();'>
+<div id="container">
+  <div id="header">
+    <h1><span><a href="http://xuqingkuang.is-programmer.com/">427 Error - Site not perfect</a></span></h1>
+    <h2>记录，回忆，思考</h2>
+  </div>
+
+  <div id="page">
+    <div id="content">
+      
+<div id="article_wrap">
+  <div class="pre_next_post">
+	<div><a href="http://xuqingkuang.is-programmer.com/posts/6725.html" class="up" title="Previous post">日版 D2C Key Wii 改版美版完美教程（持续更新）</a></div> 
+        <div><a href="http://xuqingkuang.is-programmer.com/2009/5/3/easy-way-to-dialup-with-bluetooth-and-usb-in-linux.8255.html" class="down" title="Next post">简单办法搞定 Linux 上蓝牙和 USB 线 GPRS 拨号上网。</a></div>
+  </div>
+
+  <h1>Python 技巧：@classmethod 修饰符</h1>
+
+  <div id="article_header">
+    <strong> K*K</strong> 
+    posted @ Fri, 06 Mar 2009 01:44:28 +0800
+     in <a href="http://xuqingkuang.is-programmer.com/categories/1748/posts">鼓鼓捣捣</a>
+	with tags 
+	<a href="http://xuqingkuang.is-programmer.com/tag/python">python</a>  <a href="http://xuqingkuang.is-programmer.com/tag/programming">programming</a>  
+    , 10569 readers
+        </div>
+
+  
+  
+  <div id="article_body">
+    <div id="article_content"><p>
+	通常情况下，如果我们要使用一个类的方法，那我们只能将一个类实体化成一个对象，进而调用对象使用方法。</p>
+<p>
+	比如：</p>
+<div class="hl_result">
+	<div class="python" style="border: 1px solid rgb(191, 208, 217); margin: 8px; padding: 0px; background: rgb(221, 238, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+		<span style="color: rgb(255, 119, 0); font-weight: bold;">class</span> Hello<span style="color: black;">(</span><span style="color: rgb(0, 128, 0);">object</span><span style="color: black;">)</span>:<br>
+		&nbsp; &nbsp; <span style="color: rgb(255, 119, 0); font-weight: bold;">def</span> <span style="color: rgb(0, 0, 205);">__init__</span>:<br>
+		&nbsp; &nbsp; &nbsp; &nbsp; ...<br>
+		<br>
+		&nbsp; &nbsp; <span style="color: rgb(255, 119, 0); font-weight: bold;">def</span> print_hello<span style="color: black;">(</span><span style="color: black;">self)</span>:<br>
+		&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: rgb(255, 119, 0); font-weight: bold;">print</span> <span style="color: rgb(72, 61, 139);">"Hello"</span></div>
+</div>
+<p>
+	&nbsp;要用 print_hello() 就得：</p>
+<div class="hl_result">
+	<div class="python" style="border: 1px solid rgb(191, 208, 217); margin: 8px; padding: 0px; background: rgb(221, 238, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+		hlo = Hello<span style="color: black;">(</span><span style="color: black;">)</span><br>
+		hlo.<span style="color: black;">print_hello</span><span style="color: black;">(</span><span style="color: black;">)</span><br>
+		Hello</div>
+</div>
+<p>
+	如果用了 @classmethod 就简单了。</p>
+<p>
+	<a id="more"></a></p>
+<div class="hl_result">
+	<div class="python" style="border: 1px solid rgb(191, 208, 217); margin: 8px; padding: 0px; background: rgb(221, 238, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+		<span style="color: rgb(255, 119, 0); font-weight: bold;">class</span> Hello<span style="color: black;">(</span><span style="color: rgb(0, 128, 0);">object</span><span style="color: black;">)</span>:<br>
+		&nbsp; &nbsp; <span style="color: rgb(255, 119, 0); font-weight: bold;">def</span> <span style="color: rgb(0, 0, 205);">__init__</span>:<br>
+		&nbsp; &nbsp; &nbsp; &nbsp; ...<br>
+		<br>
+		&nbsp;&nbsp;&nbsp; @classmethod<br>
+		&nbsp; &nbsp; <span style="color: rgb(255, 119, 0); font-weight: bold;">def</span> print_hello<span style="color: black;">(cls</span><span style="color: black;">)</span>:<br>
+		&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: rgb(255, 119, 0); font-weight: bold;">print</span> <span style="color: rgb(72, 61, 139);">"Hello"</span></div>
+	<p>
+		要用的话直接：</p>
+	<div class="hl_result">
+		<div class="python" style="border: 1px solid rgb(191, 208, 217); margin: 8px; padding: 0px; background: rgb(221, 238, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0); -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+			Hello.<span style="color: black;">print_hello</span><span style="color: black;">(</span><span style="color: black;">)<br>
+			Hello </span></div>
+	</div>
+	<p>
+		注意：@classmethod 仅仅适用于单独的，与类本身的数据结构无关函数，其实用了它的函数，与使用普通函数无异，甚至不能在参数里加入 self，如果要在其中使用类的数据结构，仍然需要将类实例化一次才可以，所以要小心使用。</p>
+</div>
+<p>
+	&nbsp;其实 Python 的 Decorator 非常有意思，更多可以去下面的网页参考一下：</p>
+<p>
+	<a href="http://www.python.org/dev/peps/pep-0318/">http://www.python.org/dev/peps/pep-0318/</a></p>
+</div>
+  </div>
+
+  
+  <div id="article_bar">
+  <div class="ui-tabs ui-widget ui-widget-content ui-corner-all" id="article_tabs">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+	    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#relative_posts_post_bar">Relative Posts</a></li>
+	    <li class="ui-state-default ui-corner-top"><a href="#global_relative_posts_post_bar">Global Relative Posts</a></li>
+    </ul>
+	<div class="ui-tabs-panel ui-widget-content ui-corner-bottom" id="relative_posts_post_bar">
+	    <ul>
+		<li><a href="http://xuqingkuang.is-programmer.com/2011/7/8/long-polling-implementation.27926.html">Long polling</a></li>
+		<li><a href="http://xuqingkuang.is-programmer.com/2011/1/18/catch-the-yellow-cattles-script.23857.html">春运又到了，献上更新版抓黄牛脚本。</a></li>
+		<li><a href="http://xuqingkuang.is-programmer.com/2010/12/27/coupling-soa-and-testing-driven.23470.html">高内聚、低耦合、SOA 和测试驱动。</a></li>
+		<li><a href="http://xuqingkuang.is-programmer.com/2010/12/9/two-algorithm-write-in-python.23038.html">字符串反转和判断素数的 Python 语言算法范例</a></li>
+		<li><a href="http://xuqingkuang.is-programmer.com/2010/12/6/qpid-and-messagebus.22973.html">QPID 消息队列初步</a></li>
+</ul>	
+
+	</div>
+	<div class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" id="global_relative_posts_post_bar">
+	    <ul>
+		        <li><a href="http://lilydjwg.is-programmer.com/2014/9/29/self-made-expect-in-python.63382.html" subdomain="lilydjwg">使用 Python 自制 expect 功能</a></li>
+		        <li><a href="http://xizhengbing.is-programmer.com/posts/63090.html" subdomain="xizhengbing">python 正则小试</a></li>
+		        <li><a href="http://hoblovski.is-programmer.com/posts/56003.html" subdomain="Hoblovski">自动命名Python脚本</a></li>
+		        <li><a href="http://lilydjwg.is-programmer.com/2014/8/5/answers-to-coolshell-fun.55393.html" subdomain="lilydjwg">CoolShell 解密游戏解答</a></li>
+		        <li><a href="http://lilydjwg.is-programmer.com/2014/7/18/search-and-view-quickly.53141.html" subdomain="lilydjwg">搜索，快人一步</a></li>
+</ul>	
+
+	</div>
+  </div>
+  </div>
+
+
+
+  <div id="comments_wrap">
+      
+
+<div class="articlefooter">
+        <span class="comments">
+	<a href="http://xuqingkuang.is-programmer.com/posts/7404.rss"><img alt="Small_feed" class="feed" src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/small_feed.png"></a>
+	Comments (2)
+    </span>
+</div>
+    <div id="comments">
+            <div class="comment_box comment_box0" id="comment152384">
+<div class="comment_header">
+    <div class="comments_count">
+	    1
+    </div> 
+	    <span class="twitter_comment_button"><a href="http://twitter.com/#towerjoo" class="follow_him" target="_blank"></a></span>
+	    <span class="reply_comment_button"><a href="#" onclick="reply_to('tower', '152384');event.returnValue = false;return false;" title="Reply to tower">[Reply]</a></span>
+	    <span class="mark_spam_comment_button" style="display:none;"><a href="http://xuqingkuang.is-programmer.com/comments/152384/mark_as_spam.js" data-method="post" data-remote="true" id="mark_spam_comment_152384" onclick="show_spin('mark_spam_comment_152384');" rel="nofollow" title="[Mark as spam]">[Mark as spam]</a></span>
+</div>
+<div class="comment_body">
+	<div class="comment_avatar">
+	    <img alt="" src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/dff0f41ed9d64320ac3af70c8f8f03d1.jpg">
+	</div>
+	<div class="comment_content">
+	    <a href="http://mindsbook.cnblogs.com/">tower</a> said: 
+	    <br>
+	    <small><a href="#comment152384"><span class="relative_time_comment">4 years ago</span></a></small>
+	    <p>@classmethod
+<br>    def print_hello():
+<br>        print "Hello"</p>
+
+<p>classmethod修饰的函数第一个参数应该是cls，即调用类为第一个参数，而不能为空。</p>
+
+<p>即：</p>
+
+<p>@classmethod
+<br>    def print_hello(cls):
+<br>         print "hello"</p>
+
+<p>那么 Hello.print_hello()时，隐式地以Hello为print_hello的第一个参数。</p>
+
+<p>Regards.</p>
+	</div>
+</div>
+</div>
+
+    <div class="comment_box comment_box1 comment_self comment_reply" id="comment153374" reply_id="152384">
+<div class="comment_header">
+    <div class="comments_count">
+	    2
+    </div> 
+	    
+	    <span class="reply_comment_button"><a href="#" onclick="reply_to('K*K', '153374');event.returnValue = false;return false;" title="Reply to K*K">[Reply]</a></span>
+	    <span class="mark_spam_comment_button" style="display:none;"><a href="http://xuqingkuang.is-programmer.com/comments/153374/mark_as_spam.js" data-method="post" data-remote="true" id="mark_spam_comment_153374" onclick="show_spin('mark_spam_comment_153374');" rel="nofollow" title="[Mark as spam]">[Mark as spam]</a></span>
+</div>
+<div class="comment_body">
+	<div class="comment_avatar">
+	    <a href="http://xuqingkuang.is-programmer.com/"><img alt="Head_small" src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/head_small.jpg"></a>
+	</div>
+	<div class="comment_content">
+	    <a href="http://xuqingkuang.is-programmer.com/">K*K</a> said: 
+	    <br>
+	    <small><a href="#comment153374"><span class="relative_time_comment">4 years ago</span></a></small>
+	    <p>@tower: 嗯，我忘记写了。。。 :-p
+</p>
+	</div>
+</div>
+</div>
+
+
+ 
+    </div>
+
+
+
+<script src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/ckeditor.js" type="text/javascript"></script><br>
+<div id="post_comment">
+    <a href="#" id="cancel_reply_link" onclick="cancel_reply_to_id();event.returnValue = false;return false;" style="display:none;">Cancel reply</a>
+
+<form accept-charset="UTF-8" action="/posts/7404/comments" data-remote="true" id="rform_chito_comment" method="post" onsubmit="return false;"><div style="margin:0;padding:0;display:inline"><input name="utf8" value="✓" type="hidden"><input name="authenticity_token" value="kgMiwkTgCMSwfEiVNEFLRr7+L0w84NtDD3EhTWy2oAs=" type="hidden"></div>
+     <div id="comment_error" style="display: none;"></div>
+
+
+     
+    	 <label>Nick name</label>
+         <input id="comment_writer" name="comment[writer]" size="10" type="text"> 
+         <a href="http://xuqingkuang.is-programmer.com/login?jump=http%3A%2F%2Fxuqingkuang.is-programmer.com%2F2009%2F3%2F6%2Fpython-technique-classmethod-decorator.7404.html">Login</a> 
+         <label>E-mail:</label>
+         <input id="comment_email" name="comment[email]" size="30" type="text"> *
+         <br>
+         <label>Web:</label>
+         <input id="comment_homepage" name="comment[homepage]" size="30" type="text">
+         <br>
+         <label>Twitter:</label>
+         <input id="comment_twitter" name="comment[twitter]" size="12" type="text">
+         <br>
+         <input id="comment_info" name="comment[info]" size="6" class="comment_info_field" autocomplete="off" type="text"> 
+         <input id="comment_value" name="comment[value]" value="some" type="hidden">
+
+     <div id="comment_editor">
+       <input id="comment_mode" name="comment[mode]" value="plain" type="hidden">	
+       <input id="comment_reply_to" name="comment[reply_to]" value="" type="hidden">
+       <textarea class="pc" cols="40" id="comment_content" name="comment[content]" onkeydown="if(event.ctrlKey&amp;&amp;event.keyCode==13){document.getElementById('subm_chito_comment').click();return false};" rows="3"></textarea>
+       <input id="comment_editor_button" onclick="show_editor();" type="button">
+     </div>
+         <label><input id="enable_notifier" name="enable_notifier" value="1" type="checkbox">Notify follow-up comments via e-mail </label>
+     <div id="comment_extra">
+         <div id="show_simple_captcha"><!-- Copyright (c) 2007 [Sur http://expressica.com] -->
+
+<style type="text/CSS">
+  
+  #simple_captcha{padding: 5px 0 0 0 !important;}
+  #simple_captcha,
+  #simple_captcha div{display: table;}
+  #simple_captcha .simple_captcha_field,
+  #simple_captcha .simple_captcha_image{
+    margin: 0px 0px 2px 0px !important;
+    padding: 0px !important;
+  }
+  #simple_captcha .simple_captcha_image img{
+    margin: 0px !important;
+    padding: 0px !important;
+    width: 110px !important;
+  }
+  #simple_captcha .simple_captcha_label{font-size: 12px;}
+  #simple_captcha .simple_captcha_field input{
+    width: 120px !important;
+    border: 1px solid #ccc;
+    background-color: #efefef;
+  }
+</style>
+
+<div id="simple_captcha">
+  <div class="simple_captcha_image">
+    <img src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/simple_captcha.jpg" alt="loading captcha image...">
+  </div>
+  
+  <div class="simple_captcha_field">
+    <input id="captcha" name="captcha" type="text">
+  </div>
+  
+  <div class="simple_captcha_label">
+    (type the code from the image)
+  </div>
+</div>
+</div>
+     </div>
+         <input autocomplete="off" data-disable-with="Sending comment..." id="subm_chito_comment" name="commit" value="Submit" type="submit">
+         <span id="crtl_enter_tip" style="color:#ccc;font-size:small;"> or Ctrl+Enter</span>
+</form>
+
+</div>
+ <script type="text/javascript">
+//<![CDATA[
+        $('#subm_chito_comment').click(function(){
+            $(this).attr("disabled",true);
+            $(this).val('Sending comment...');
+            update_field();
+            $('#comment_value').val('');
+            $.post('/posts/7404/comments', $('#rform_chito_comment').find('input').serialize() + '&' + $('#rform_chito_comment').find('textarea').serialize(), function(){
+                $('#subm_chito_comment').val('Submit');
+                $('#subm_chito_comment').attr("disabled",false);
+            });
+
+            return false;
+        });
+
+//]]>
+</script>
+
+
+  </div>
+  <div class="page_clear"></div>
+
+</div>
+
+
+    </div>
+
+    <div id="sidebar">
+				    <h3>Search</h3>
+					<div id="chito_search">
+<form accept-charset="UTF-8" action="/posts" id="search_form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" value="✓" type="hidden"></div>    <input id="s" name="s" size="10" type="text">
+    <input name="commit" value="Search" type="submit">
+</form></div>
+
+				    <h3>My Google+</h3>
+					<script type="text/javascript">mbgc='f5f5f5';ww='200';mbc='cecece';bbc='3F79D5';bmobc='3b71c6';bbgc='4889F0';bmoc='3F79D5';bfc='FFFFFF';bmofc='ffffff';tlc='cecece';tc='6a6a6a';nc='6a6a6a';bc='6a6a6a';l='y';fs='16';fsb='13';bw='100';ff='4';pc='4889F0';b='s'; pid='109241383533642244946';</script><script type="text/javascript" src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/google_plus_widget.js"></script><div style="border-width: 1px; border-style: solid; width: 200px; margin-left: auto; margin-right: auto;"><a href="http://widgetsplus.com/" target="_blank" style="display: block; width: 200px; height: 250px; background-image: url(&quot;http://widgetsplus.com:8080/legacy/wp-is-back.png&quot;); background-repeat: no-repeat; background-position: center top; background-size: 100% auto;"></a></div>
+
+				    <h3>新浪微博</h3>
+					<iframe id="sina_widget_1326849863" style="width:100%; height:500px;" scrolling="no" src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/widget_blog.htm" frameborder="0"></iframe>
+
+				    <h3>Page</h3>
+					<ul class="navlist">
+	    <li><a href="http://xuqingkuang.is-programmer.com/">Home</a></li>
+	    <li><a href="http://xuqingkuang.is-programmer.com/guestbook">Guestbook</a></li>
+	    <li><a href="http://www.flickr.com/photos/xuqingkuang/">Flickr</a></li>
+	    <li><a href="http://www.box.net/shared/db9dx205gq">Box.net</a></li>
+	    <li><a href="http://delicious.com/xuqingkuang">Del.icio.us</a></li>
+	    <li><a href="http://www.douban.com/people/xuqingkuang/">Douban</a></li>
+	    <li><a href="http://renren.com/profile.do?id=251520935&amp;_vip_flag=89">人人</a></li>
+	    <li><a href="http://xuqingkuang.is-programmer.com/admin">Admin</a></li>
+</ul>	
+
+				    <h3>Categories</h3>
+					    <ul id="category">
+	<li class="category">
+	        <a href="http://xuqingkuang.is-programmer.com/categories/1747/posts">来不及分类的东东</a>
+	</li>
+	<li class="category">
+	        <a href="http://xuqingkuang.is-programmer.com/categories/1748/posts">鼓鼓捣捣</a>
+	</li>
+	<li class="category">
+	        <a href="http://xuqingkuang.is-programmer.com/categories/1749/posts">情感生活</a>
+	</li>
+	<li class="category">
+	        <a href="http://xuqingkuang.is-programmer.com/categories/1751/posts">我转</a>
+	</li>
+	<li class="category">
+	        <a href="http://xuqingkuang.is-programmer.com/categories/1752/posts">影音世界</a>
+	</li>
+	<li class="category">
+	        <a href="http://xuqingkuang.is-programmer.com/categories/1753/posts">5败</a>
+	</li>
+	<li class="category">
+	        <a href="http://xuqingkuang.is-programmer.com/categories/1754/posts">Just for fun</a>
+	</li>
+	<li class="category">
+	        <a href="http://xuqingkuang.is-programmer.com/categories/5669/posts">经验和总结</a>
+	</li>
+    </ul>
+
+				    <h3>Tag Cloud</h3>
+					  <div id="tag_cloud">
+    <a href="http://xuqingkuang.is-programmer.com/tag/37signal" class="tag_css1">37signal</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/Algorithm" class="tag_css1">Algorithm</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/Android" class="tag_css1">Android</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/CI" class="tag_css1">CI</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/Cellphone" class="tag_css1">Cellphone</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/Editor" class="tag_css1">Editor</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/English" class="tag_css1">English</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/HTC" class="tag_css1">HTC</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/MIUI" class="tag_css1">MIUI</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/Nexus" class="tag_css1">Nexus</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/Nokia" class="tag_css1">Nokia</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/Opera" class="tag_css1">Opera</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/PalmPre" class="tag_css1">PalmPre</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/SOA" class="tag_css1">SOA</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/Theme" class="tag_css1">Theme</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/UT" class="tag_css1">UT</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/Video" class="tag_css1">Video</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/WebOS" class="tag_css1">WebOS</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/Wordpress" class="tag_css1">Wordpress</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/X" class="tag_css1">X</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/ajax" class="tag_css1">ajax</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/apache" class="tag_css1">apache</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/baidu" class="tag_css1">baidu</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/bechmark" class="tag_css1">bechmark</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/benchmark" class="tag_css2">benchmark</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/blog" class="tag_css3">blog</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/blogger" class="tag_css1">blogger</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/blogmove" class="tag_css1">blogmove</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/bluesea" class="tag_css1">bluesea</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/bluetooth" class="tag_css1">bluetooth</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/boinc" class="tag_css1">boinc</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/book" class="tag_css1">book</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/browser" class="tag_css1">browser</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/buy" class="tag_css2">buy</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/c" class="tag_css1">c</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/chrome" class="tag_css1">chrome</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/chromium" class="tag_css1">chromium</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/clock" class="tag_css1">clock</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/cocoa" class="tag_css1">cocoa</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/computer" class="tag_css1">computer</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/cooking" class="tag_css1">cooking</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/debug" class="tag_css1">debug</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/design" class="tag_css1">design</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/development" class="tag_css1">development</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/dialup" class="tag_css1">dialup</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/distribution" class="tag_css1">distribution</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/django" class="tag_css2">django</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/django%20view%20syncdb" class="tag_css1">django view syncdb</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/dreamhost" class="tag_css1">dreamhost</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/dri" class="tag_css1">dri</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/e71" class="tag_css1">e71</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/edge" class="tag_css1">edge</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/emulator" class="tag_css1">emulator</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/encoding" class="tag_css1">encoding</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/everest" class="tag_css1">everest</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/fedora" class="tag_css2">fedora</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/festival" class="tag_css1">festival</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/flickr" class="tag_css1">flickr</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/font" class="tag_css1">font</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/form" class="tag_css1">form</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/fun" class="tag_css2">fun</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/game" class="tag_css1">game</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/gfw" class="tag_css1">gfw</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/google" class="tag_css1">google</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/gprs" class="tag_css1">gprs</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/gtk" class="tag_css1">gtk</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/gxemul" class="tag_css1">gxemul</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/harddisk" class="tag_css1">harddisk</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/host" class="tag_css1">host</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/id3" class="tag_css1">id3</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/ipa" class="tag_css1">ipa</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/iphone" class="tag_css1">iphone</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/itunes" class="tag_css1">itunes</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/javascript" class="tag_css1">javascript</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/kerberos" class="tag_css1">kerberos</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/kernel" class="tag_css1">kernel</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/language" class="tag_css1">language</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/linux" class="tag_css3">linux</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/loongson" class="tag_css2">loongson</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/lyric" class="tag_css2">lyric</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/mac" class="tag_css3">mac</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/maillist" class="tag_css1">maillist</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/max" class="tag_css1">max</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/meeting" class="tag_css1">meeting</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/messagebus" class="tag_css1">messagebus</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/movie" class="tag_css1">movie</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/mp3" class="tag_css1">mp3</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/municator" class="tag_css1">municator</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/music" class="tag_css1">music</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/mysql" class="tag_css1">mysql</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/nas" class="tag_css1">nas</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/nbench" class="tag_css1">nbench</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/network" class="tag_css1">network</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/nitrate" class="tag_css1">nitrate</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/orm" class="tag_css1">orm</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/osx" class="tag_css3">osx</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/palm" class="tag_css1">palm</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/performance" class="tag_css2">performance</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/photograph" class="tag_css1">photograph</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/php" class="tag_css1">php</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/piano" class="tag_css1">piano</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/plan" class="tag_css1">plan</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/post" class="tag_css2">post</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/powerbook" class="tag_css1">powerbook</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/programming" class="tag_css1">programming</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/python" class="tag_css2">python</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/qpid" class="tag_css1">qpid</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/quartz" class="tag_css1">quartz</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/read" class="tag_css1">read</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/recommand" class="tag_css1">recommand</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/redflag" class="tag_css1">redflag</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/register" class="tag_css1">register</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/relative" class="tag_css1">relative</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/reminder" class="tag_css1">reminder</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/remote%20control" class="tag_css1">remote control</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/repair" class="tag_css1">repair</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/robot" class="tag_css1">robot</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/ror" class="tag_css1">ror</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/rpm" class="tag_css1">rpm</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/rubyonrails" class="tag_css1">rubyonrails</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/sata" class="tag_css1">sata</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/scribes" class="tag_css1">scribes</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/scrum%20agile" class="tag_css1">scrum agile</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/share" class="tag_css1">share</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/situation" class="tag_css3">situation</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/software" class="tag_css1">software</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/song" class="tag_css2">song</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/sqlalchemy" class="tag_css1">sqlalchemy</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/sqlobject" class="tag_css1">sqlobject</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/starcraft2" class="tag_css1">starcraft2</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/storage" class="tag_css1">storage</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/summary" class="tag_css1">summary</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/switch" class="tag_css1">switch</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/system" class="tag_css1">system</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/taobao" class="tag_css1">taobao</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/tc" class="tag_css1">tc</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/tcms" class="tag_css1">tcms</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/test" class="tag_css1">test</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/testing" class="tag_css1">testing</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/thinking" class="tag_css4">thinking</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/ticket" class="tag_css1">ticket</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/timezone" class="tag_css1">timezone</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/trafficcontrol" class="tag_css1">trafficcontrol</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/train" class="tag_css1">train</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/translation" class="tag_css1">translation</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/turbogears" class="tag_css1">turbogears</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/typo" class="tag_css1">typo</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/usb" class="tag_css1">usb</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/vim" class="tag_css1">vim</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/vista" class="tag_css1">vista</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/wave" class="tag_css1">wave</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/web" class="tag_css1">web</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/wii" class="tag_css1">wii</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/windows" class="tag_css1">windows</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/windowsmedia" class="tag_css1">windowsmedia</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/wine" class="tag_css1">wine</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/wmv" class="tag_css1">wmv</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/wvdial" class="tag_css1">wvdial</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/xoops" class="tag_css1">xoops</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/zt" class="tag_css2">zt</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/%E6%89%8B%E6%9C%BA" class="tag_css1">手机</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/%E7%81%AB%E8%BD%A6%E7%A5%A8" class="tag_css1">火车票</a>
+    <a href="http://xuqingkuang.is-programmer.com/tag/%E7%82%B9%E5%BF%83" class="tag_css1">点心</a>
+  </div>
+
+				    <h3>Links</h3>
+					<ul class="navlist">
+			    <li><a href="http://574762584.qzone.qq.com/" title="我的妞妞的空间">妞妞's QQ zone</a></li>
+			    <li><a href="http://pczou.xplore.cn/index.php" title="红旗服务器大牛的博客">PC Zou's Blog</a></li>
+			    <li><a href="#" title="奇异的分隔符">-------------------</a></li>
+			    <li><a href="http://42qu.com/" title="找到给你答案的人">42区</a></li>
+			    <li><a href="http://solidot.org/" title="Solidot Geek 新闻">Solidot</a></li>
+			    <li><a href="http://www.cnbeta.com/" title="变态的新闻网站，每天都更新">cnBeta.COM</a></li>
+			    <li><a href="http://planet.gentoo-cn.org/" title="Gentoo 用户的 Planet">Planet Gentoo 中文</a></li>
+</ul>	
+
+				    <h3>Subscriptions</h3>
+					<a href="http://www.zhuaxia.com/add_channel.php?url=http://rss.kuangxuqing.com" target="_blank"><img src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/icon_subshot02_zhuaxia.gif" alt="抓虾" style="margin-bottom:3px" border="0" vspace="2"></a><br>
+<a href="http://fusion.google.com/add?feedurl=http://rss.kuangxuqing.com" target="_blank"><img src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/icon_subshot02_google.gif" alt="google reader" style="margin-bottom:3px" border="0" vspace="2"></a><br>
+<a href="http://www.bloglines.com/sub/http://rss.kuangxuqing.com" target="_blank"><img src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/icon_subshot02_bloglines.gif" alt="bloglines" style="margin-bottom:3px" border="0" vspace="2"></a><br>
+<a href="http://inezha.com/add?url=http://rss.kuangxuqing.com" target="_blank"><img src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/icon_subshot02_nazha.gif" alt="哪吒" style="margin-bottom:3px" border="0" vspace="2"></a><br>
+<a href="http://mail.qq.com/cgi-bin/feed?u=http://rss.kuangxuqing.com" target="_blank"><img src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/icon_subshot02_qq.gif" alt="QQ邮箱" style="margin-bottom:3px" border="0" vspace="2"></a><br>
+
+<!-- Google analytic -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-1047700-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+    </div>
+    <br style="clear:both;">
+  </div>
+<script src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/jquery-ui-1.js" type="text/javascript"></script>
+<script src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/jquery.js" type="text/javascript"></script>
+<script src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/blog.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+//<![CDATA[
+$(function() {$("#article_tabs").tabs();});
+//]]>
+</script>
+ <script type="text/javascript">
+                    function show_relative_time(){
+                        _show_relative_time('span.relative_time_comment', 'en-US');
+                    }
+                    $(document).ready(show_relative_time);
+                </script>
+              <script src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/shCore.js" type="text/javascript"></script>
+<script src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/shBrushes.js" type="text/javascript"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script><script src="Python%20%E6%8A%80%E5%B7%A7%EF%BC%9A@classmethod%20%E4%BF%AE%E9%A5%B0%E7%AC%A6%20-%20427%20Error%20-%20Site%20not%20perfect_files/core.js" type="text/javascript"></script>
+ <script type="text/javascript">
+                    function auto_resize_img(){
+                        img_resize_normal(500, "Open in new window");
+                    }
+                    $(document).ready(auto_resize_img);
+                    </script>
+
+  <div id="footer">
+    <hr>
+    <p>Host by <a href="http://www.is-programmer.com/">is-Programmer.com</a> | Power by <a href="http://github.com/galeki/chito">Chito 1.3.3 beta</a></p>
+    <ul>
+      <li>
+        Styled with <a href="http://quotedprintable.com/pages/scribbish">scribbish</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+</body></html>
