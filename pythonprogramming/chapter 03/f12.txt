@@ -1,0 +1,7 @@
+f12.txt
+
+line 2
+line3
+
+END
+

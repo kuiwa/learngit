@@ -1,0 +1,5 @@
+f6.txt
+
+line 2 edit
+...
+
