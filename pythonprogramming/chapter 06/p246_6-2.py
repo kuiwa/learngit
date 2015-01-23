@@ -3,7 +3,7 @@
 " head with letters or '_', others with alphanumeric"
 import string
 import keyword
-def ifVliad(alph,first=True)
+def isValid(alph,first=True):
 	alphas = string.letters + '_'
 	nums = string.digits
 	alphnums = alphas + nums
@@ -12,33 +12,33 @@ def ifVliad(alph,first=True)
 			print 'invalid: first symbol must be alphabetic'
 			return False
 	else:
-		if alph not in alphnums:
-			print ''invalid: remaining symbols must be alphanumeric'
+		for i in alph:
+			if i not in alphnums:
+				print 'invalid: remaining symbols must be alphanumeric'
+				return False
+	return True
 def keywords(myInput):
-	if myInput in keywor.kelist:
+	if myInput in keyword.kwlist:
 		return True
 	else:
 		return False
 
-break_id = True
 print 'Welcome to the Identifier Checker v2.0'
-while break_id:
+while True:
 	myInput = raw_input('Identifier to test? ')
 	length = len(myInput)
 	if length == 0:
 		print 'Testees must be at least 1 chars long.'
-	elif length >= 1:
-		if myInput[0] not in alphas:
-
+		continue
+	elif length == 1:
+		ident = isValid(myInput[0])
+	else:
+		ident = isValid(myInput[0])
+		ident = ident & isValid(myInput[1:],first=False)
+	if ident:
+		print 'okay as an identifier'
+		if keywords(myInput):
+			print "It's a keyword"
 		else:
-			if length > 1:
-				right = True
-			
-				for otherChar in myInput[1:]:
-					if otherChar not in alphnums:
-						
-					right = False
-					break
-				if right == True:
-					print 'okay as an identifier'
-
+			print "It's not a keyword"
+		break
