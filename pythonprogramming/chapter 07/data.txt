@@ -1,0 +1,6 @@
+baba:88
+Tkinter:tt
+vivi:vv
+zhouj:zz
+77:88
+kuiwa:kk
